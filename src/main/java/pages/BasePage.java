@@ -10,11 +10,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     protected WebDriver driver;
-    public HeaderPage headerPage; //CHANGE!!!!!!!!!!
+    private HeaderComponent headerComponent;
+
+    public HeaderComponent getHeaderComponent() {
+        return Objects.requireNonNullElseGet(this.headerComponent, () -> new HeaderComponent(driver));
+    }
 
     @BeforeEach
     public void setDriver() {
@@ -24,7 +29,6 @@ public class BasePage {
             driver.manage().window().maximize();
             driver.get("https://demo.opencart.com");
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            headerPage = new HeaderPage(driver); //CHANGE!!!!!!!!!!
         }
     }
 
