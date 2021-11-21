@@ -7,15 +7,14 @@ import pages.BasePage;
 import pages.HeaderComponent;
 import pages.LoginPage;
 
-public class LoginTest extends BasePage {
+public class LoginTest extends BaseTest {
     LoginPage loginPage;
 
     private static final String loginErrorExpectedText = "Warning: No match for E-Mail Address and/or Password.";
 
-
     @Test
     void errorAllertValidationOnLoginPage() {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.getHeaderComponent().chooseFromDropdown("Login");
         loginPage.inputEmailToEmailField("test@gmail.com");
         loginPage.inputPasswordToEmailField("1234");
@@ -27,7 +26,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void successfullLogin(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.getHeaderComponent().chooseFromDropdown("Login");
         loginPage.inputEmailToEmailField("sajowi9588@epeva.com");
         loginPage.inputPasswordToEmailField("123123");
@@ -37,7 +36,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void failLoginNoCredentials(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.getHeaderComponent().chooseFromDropdown("Login");
         loginPage.clickSubmitButton();
         Assertions.assertThat(loginPage.getHeaderComponent().isLoginDisplayed()).isEqualTo(true);
@@ -45,7 +44,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void failLoginInvalidPassword(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.getHeaderComponent().chooseFromDropdown("Login");
         loginPage.inputEmailToEmailField("sajowi9588@epeva.com");
         loginPage.inputPasswordToEmailField("1231231");

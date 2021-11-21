@@ -1,48 +1,16 @@
 package pages;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
+@Getter
+@Accessors(fluent = true)
+public class BasePage extends AbstractBasePage {
+    @Getter
+    @Accessors
+    protected HeaderComponent headerComponent = new HeaderComponent();
+    @Getter
+    @Accessors
+    protected UpperNavComponentDesktop upperNavComponentDesktop = new UpperNavComponentDesktop();
 
-public class BasePage {
-    protected WebDriver driver;
-    private HeaderComponent headerComponent;
-
-    public HeaderComponent getHeaderComponent() {
-        return Objects.requireNonNullElseGet(this.headerComponent, () -> new HeaderComponent(driver));
-    }
-
-    @BeforeEach
-    public void setDriver() {
-        if (driver == null) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.get("https://demo.opencart.com");
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        }
-    }
-
-    @AfterEach
-    public void closeDriver() {
-        if (driver != null)
-            driver.quit();
-    }
-
-    public WebElement waitForVisibilityOfElement(WebElement locator) {
-        return new WebDriverWait(driver, 200).until(ExpectedConditions.visibilityOf(locator));
-    }
-
-    public WebElement findElementBy(By by) {
-        return waitForVisibilityOfElement(driver.findElement(by));
-    }
 }

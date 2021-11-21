@@ -3,8 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HeaderComponent extends BasePage {
-    public HeaderComponent(WebDriver driver){this.driver = driver;};
+public class HeaderComponent extends AbstractBasePage {
 
     private static final String LOGIN_STATUS = "//ul[contains(@class, 'menu-right')]/descendant::a[contains(text(),'Log')]";
     private static final String CURRENCY_BUTTON = "//div[@class='btn-group open']/button[contains(@class, 'dropdown-toggle')]";

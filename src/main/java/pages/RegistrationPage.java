@@ -6,11 +6,11 @@ import org.openqa.selenium.WebDriver;
 public class RegistrationPage extends BasePage {
 
     private static final String INPUT_FIELD_SECTION = "input-%s";
-    private static final String SUBSCRIBE_RADIO = "//label[@class='radio-inline']//descendant::input[@name='newsletter' and @value=%s]";
+    private static final String SUBSCRIBE_RADIO = "//label[@class='radio-inline']//descendant::input[@name='newsletter' and @value='%s']";
     private static final String PRIVACYCONSENT_CHECKBOX = "//div[@class='pull-right']//input[@name='agree']";
     private static final String CONTINUE_BUTTON = "//div[@class='pull-right']//input[@value='Continue']";
-    private static final String VALIDATION_ERROR = "//div[@class='text-danger' and contains(text(), %s)]";
-    private static final String GENERAL_ERROR = "///ul[@class='breadcrumb']//following-sibling::div[contains(text(), %s)]";
+    private static final String VALIDATION_ERROR = "//div[@class='text-danger' and contains(text(), '%s')]";
+    private static final String GENERAL_ERROR = "//ul[@class='breadcrumb']//following-sibling::div[contains(text(), '%s')]";
 
     public void inputRegistrationForm(String field, String input){ findElementBy(By.id
             (String.format(INPUT_FIELD_SECTION, field))).sendKeys(input);}

@@ -1,18 +1,14 @@
 package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage(WebDriver driver){
-        this.driver=driver;
-    }
-
     private static final String EMAIL_INPUT_FIELD = "input-email";
     private static final String PASSWORD_INPUT_FIELD = "password";
     private static final String SUBMIT_LOGIN_BUTTON = "//input[@type='submit']";
     private static final String LOGIN_ERROR_ALLERT = "//div[contains(@class, 'alert')]";
-
 
 
     public void inputEmailToEmailField(String email) {
@@ -30,7 +26,5 @@ public class LoginPage extends BasePage {
     public String getLoginErrorActualMessage() {
         return findElementBy(By.xpath(LOGIN_ERROR_ALLERT)).getText();
     }
-
-
 
 }
