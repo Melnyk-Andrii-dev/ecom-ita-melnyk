@@ -23,8 +23,6 @@ public class HeaderComponent extends AbstractBasePage {
 
     public void clickContactUs() { findElementBy(By.xpath(CONTACT_US)).click(); };
 
-    public void clickRegisterFromDropdown() { findElementBy(By.xpath(String.format(MY_ACCOUNT_CONTENT, "Register"))).click(); }
-
     public boolean isLoginDisplayed() {
         findElementBy(By.xpath(MY_ACCOUNT_BUTTON)).click();
         return findElementBy(By.xpath(LOGIN_STATUS)).getText().equals("Login"); } // CHANGE!!!!!!!!
