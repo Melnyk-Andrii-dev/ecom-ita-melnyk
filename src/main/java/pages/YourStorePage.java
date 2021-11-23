@@ -75,6 +75,24 @@ public class YourStorePage extends BasePage {
     @FindBy(xpath = "//div[@class ='row']//div[contains(@class, 'product-layout')][4]//div[@class='button-group']//button[contains(@onclick, 'compare')]")
     WebElement productTileButtonCompareForth;
 
+    @FindBy(id="cart-total")
+    WebElement cartInfo;
+
+    @FindBy(xpath = "//div[@class ='row']//div[contains(@class, 'product-layout')][1]//p[@class='price']")
+    WebElement priceOfFirst;
+
+    @FindBy(xpath = "//div[@class ='row']//div[contains(@class, 'product-layout')][2]//p[@class='price']")
+    WebElement priceOfSecond;
+
+    @FindBy(xpath = "//div[@class ='row']//div[contains(@class, 'product-layout')][3]//p[@class='price']")
+    WebElement priceOfThird;
+
+    @FindBy(xpath = "//div[@class ='row']//div[contains(@class, 'product-layout')][4]//p[@class='price']")
+    WebElement priceOfForth;
+
+    @FindBy(xpath = "//div[contains(@class, 'alert-success')]//a[contains(text(), 'wish')]")
+    WebElement compareMessage;
+
     public void clickPrevOnMainSlider(){
         slideButtonPrev.click();
     }
@@ -163,4 +181,39 @@ public class YourStorePage extends BasePage {
     public void compareForth(){
         productTileButtonCompareForth.click();
     }
+
+    public int getCartQty(){
+        String[] line = cartInfo.getText().split(" ");
+        return Integer.parseInt(line[0]);
+    }
+
+    public double getCartTotal(){
+        String[] line = cartInfo.getText().split("\\$");
+        return Double.parseDouble(line[1]);
+    }
+
+    public double getPriceOfFirst(){
+        String[] line = priceOfFirst.getText().split("\\$");
+        return Double.parseDouble(line[1]);
+    }
+    public double getPriceOfSecond(){
+        String[] line = priceOfSecond.getText().split("\\$");
+        return Double.parseDouble(line[1]);
+    }
+    public double getPriceOfThird(){
+        String[] line = priceOfThird.getText().split("\\$");
+        return Double.parseDouble(line[1]);
+    }
+    public double getPriceOfForth(){
+        String[] line = priceOfForth.getText().split("\\$");
+        return Double.parseDouble(line[1]);
+    }
+
+    public boolean isCompareMessageShown(){
+        return compareMessage.isDisplayed();
+    }
+
+
+
+
 }

@@ -3,6 +3,9 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class HeaderComponent extends AbstractBasePage {
 
     private static final String LOGIN_STATUS = "//ul[contains(@class, 'menu-right')]/descendant::a[contains(text(),'Log')]";
@@ -14,6 +17,7 @@ public class HeaderComponent extends AbstractBasePage {
     private static final String WISHLIST_BUTTON = "wishlist-total";
     private static final String SHOPPINGCART_BUTTON = "//li//a[@title='Shopping Cart']";
     private static final String CHECKOUT_BUTTON = "//li//a[@title='Checkout']";
+    private static final String WISHLIST_INDICATOR = "//a[@id ='wishlist-total']//span";
 
 
     public void chooseCurrency(String currency) {
@@ -37,5 +41,12 @@ public class HeaderComponent extends AbstractBasePage {
     public void clickShoppingCartButton() { findElementBy(By.xpath(SHOPPINGCART_BUTTON)).click(); }
 
     public void clickCheckoutButton() { findElementBy(By.xpath(CHECKOUT_BUTTON)).click(); }
+
+    public int WishlistButtonIndicator() {
+        String line =findElementBy(By.id(WISHLIST_INDICATOR)).getText();
+        Pattern pattern = Pattern.compile("^\\+?(0|[1-9]\\d*)$");
+        Matcher matcher = pattern.matcher(line);
+        return Integer.parseInt(line.substring(matcher.start(), matcher.end()));
+    }
 
 }
