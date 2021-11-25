@@ -1,5 +1,6 @@
 package pages;
 
+import enums.elements.RegistrationPageInputField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -12,8 +13,14 @@ public class RegistrationPage extends BasePage {
     private static final String VALIDATION_ERROR = "//div[@class='text-danger' and contains(text(), '%s')]";
     private static final String GENERAL_ERROR = "//ul[@class='breadcrumb']//following-sibling::div[contains(text(), '%s')]";
 
-    public void inputRegistrationForm(String field, String input){ findElementBy(By.id
+//    public void inputRegistrationForm(String field, String input){ findElementBy(By.id
+//            (String.format(INPUT_FIELD_SECTION, field))).sendKeys(input);}
+
+        public void inputRegistrationForm(String field, String input){ findElementBy(By.id
             (String.format(INPUT_FIELD_SECTION, field))).sendKeys(input);}
+
+    public void inputRegistrationFormWithEnum(RegistrationPageInputField field, String input){ findElementBy(By.id
+            (String.format(INPUT_FIELD_SECTION, field.toString()))).sendKeys(input);}
 
     public void clickSubscribeRadioYes(){ findElementBy(By.xpath
             (String.format(SUBSCRIBE_RADIO, "1"))).click();}

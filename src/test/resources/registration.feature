@@ -2,7 +2,7 @@ Feature: As an unregistered user
   I want the ability to register on the site
   So that I become a full-fledged user
 
-  Scenario: The user is registered after providing valid information
+  Scenario:[PARAM] The user is registered after providing valid information
     Given Registration Page is opened
     When The user inputs 'firstname' field with 'First'
     And The user inputs 'lastname' field with 'Last'
@@ -12,6 +12,36 @@ Feature: As an unregistered user
     And The user inputs 'password' field with 'test1234'
     #password confirmation field
     And The user inputs 'confirm' field with 'test1234'
+    And The user chooses subscription - NO
+    And The user selects Privacy Policy checkbox
+    And The user clicks Continue button
+    Then The user have a Logout option on Global Header
+
+  Scenario:[ENUM] The user is registered after providing valid information
+    Given Registration Page is opened
+    When The user inputs FIRSTNAME field with 'First'
+    And The user inputs LASTNAME field with 'Last'
+    #need to update the email every time before the test
+    And The user inputs EMAIL field with 'test+2245573@mail.com'
+    And The user inputs TELEPHONE field with '0970000000'
+    And The user inputs PASSWORD field with 'test1234'
+    #password confirmation field
+    And The user inputs PASSWORD_CONFIRMATION field with 'test1234'
+    And The user chooses subscription - NO
+    And The user selects Privacy Policy checkbox
+    And The user clicks Continue button
+    Then The user have a Logout option on Global Header
+
+  Scenario:[TABLE] The user is registered after providing valid information
+    Given Registration Page is opened
+    When The user inputs text into field on Registration Page:
+      | text             | field     |
+      | First            | firstname |
+      | Last             | lastname  |
+      | test111@mail.com | email     |
+      | 0971111111       | telephone |
+      | test1234         | password  |
+      | test1234         | confirm   |
     And The user chooses subscription - NO
     And The user selects Privacy Policy checkbox
     And The user clicks Continue button
@@ -58,8 +88,8 @@ Feature: As an unregistered user
     Then The error message '<error>' is displayed on field level
     And  The user have a Login option on Global Header
     Examples:
-    |error|
-    |Password confirmation does not match password!|
+      | error                                          |
+      | Password confirmation does not match password! |
 
   Scenario Outline: Error message is shown when an already registered user tries to register
     Given Registration Page is opened
@@ -76,7 +106,7 @@ Feature: As an unregistered user
     Then The error message '<error>' is displayed on page level
     And  The user have a Login option on Global Header
     Examples:
-      |error|
-      |Warning: E-Mail Address is already registered!|
+      | error                                          |
+      | Warning: E-Mail Address is already registered! |
 
 

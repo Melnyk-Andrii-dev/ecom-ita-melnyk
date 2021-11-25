@@ -1,23 +1,16 @@
 package pages;
 
+import enums.elements.LoginPageInputField;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
-    private static final String EMAIL_INPUT_FIELD = "input-email";
-    private static final String PASSWORD_INPUT_FIELD = "password";
+
     private static final String SUBMIT_LOGIN_BUTTON = "//input[@type='submit']";
     private static final String LOGIN_ERROR_ALLERT = "//div[contains(@class, 'alert')]";
+    private static final String LOGIN_PAGE_INPUT_FIELD = "//input[@name='%s']";
 
-
-    public void inputEmailToEmailField(String email) {
-        findElementBy(By.id(EMAIL_INPUT_FIELD)).sendKeys(email);
-    }
-
-    public void inputPasswordToEmailField(String password) {
-        findElementBy(By.name(PASSWORD_INPUT_FIELD)).sendKeys(password);
-    }
 
     public void clickSubmitButton() {
         findElementBy(By.xpath(SUBMIT_LOGIN_BUTTON)).click();
@@ -27,4 +20,11 @@ public class LoginPage extends BasePage {
         return findElementBy(By.xpath(LOGIN_ERROR_ALLERT)).getText();
     }
 
+    public void inputLoginFieldsWithEnum(LoginPageInputField field, String data) {
+        findElementBy(By.xpath(String.format(LOGIN_PAGE_INPUT_FIELD, field.toString()))).sendKeys(data);
+    }
+
+    public void inputLoginFieldsWithTable(String field, String data){
+        findElementBy(By.xpath(String.format(LOGIN_PAGE_INPUT_FIELD, field))).sendKeys(data);
+    }
 }

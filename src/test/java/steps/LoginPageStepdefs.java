@@ -1,5 +1,8 @@
 package steps;
 
+import enums.elements.LoginPageInputField;
+import enums.TableFields;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,6 +10,8 @@ import io.cucumber.java.en.When;
 import org.assertj.core.api.Assertions;
 import pages.LoginPage;
 import pages.MyAccountPage;
+
+import java.util.Map;
 
 public class LoginPageStepdefs {
     private static final LoginPage loginPage = new LoginPage();
@@ -17,15 +22,13 @@ public class LoginPageStepdefs {
         loginPage.getHeaderComponent().chooseFromDropdown("Login");
     }
 
-    @When("I enter email {string} on Login page")
-    public void iEnterEmailSajowEpevaComOnLoginPage(String email) {
-        loginPage.inputEmailToEmailField(email);
+
+
+    @When("I enter to {} field {string} value on Login Page")
+    public void iInputLoginFieldsWithEnum(LoginPageInputField field, String data) {
+        loginPage.inputLoginFieldsWithEnum(field, data);
     }
 
-    @And("I enter password {string} on Login page")
-    public void iEnterPasswordOnLoginPage(String password) {
-        loginPage.inputPasswordToEmailField(password);
-    }
 
     @And("I click the Login button on Login Page")
     public void iClickTheLoginButtonOnLoginPage() {
@@ -42,17 +45,6 @@ public class LoginPageStepdefs {
         loginPage.getHeaderComponent().chooseFromDropdown("Login");
     }
 
-    @When("I enter unregistered email {string}")
-    public void iEnterUnregisteredEmailTestMailCom(String email) {
-        loginPage.inputEmailToEmailField(email);
-    }
-
-    @And("I enter any password, e.g. {string}")
-    public void iEnterAnyPasswordEG(String password) {
-        loginPage.inputPasswordToEmailField(password);
-    }
-
-
     @And("I click the Login button")
     public void iClickTheLoginButton() {
         loginPage.clickSubmitButton();
@@ -61,5 +53,16 @@ public class LoginPageStepdefs {
     @Then("The error message {string} is displayed")
     public void theErrorMessageWarningNoMatchForEMailAddressAndOrPasswordIsDisplayed(String error) {
         Assertions.assertThat(loginPage.getLoginErrorActualMessage()).as("No valid error message is displayed").isEqualTo(error);
+    }
+
+    @When("I enter text into field on Login Page:")
+    public void iEnterTextIntoFieldOnLoginPage(DataTable table) {
+        for (Map<String, String> row : table.asMaps()) {
+            String data = row.get(TableFields.INPUT_DATA.toString());
+            String field = row.get(TableFields.FIELD_NAME.toString());
+            loginPage.inputLoginFieldsWithTable(field, data);
+        }
+
+
     }
 }

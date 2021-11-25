@@ -1,11 +1,17 @@
 package steps;
 
+import enums.TableFields;
+import enums.elements.RegistrationPageInputField;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.it.Ma;
 import org.assertj.core.api.Assertions;
 import pages.RegistrationPage;
+
+import java.util.Map;
 
 public class RegistrationPageStepdefs {
     RegistrationPage registrationPage = new RegistrationPage();
@@ -59,5 +65,19 @@ public class RegistrationPageStepdefs {
     @Then("The error message {string} is displayed on page level")
     public void theErrorMessageErrorIsDisplayedOnPageLevel(String error) {
         Assertions.assertThat(registrationPage.getAlreadyRegisteredError()).isEqualTo(error);
+    }
+
+    @When("The user inputs text into field on Registration Page:")
+    public void theUserInputsTextIntoFieldOnRegistrationPage(DataTable dataTable) {
+        for (Map<String, String> map : dataTable.asMaps()) {
+            String field = map.get(TableFields.FIELD.toString());
+            String text = map.get(TableFields.TEXT.toString());
+            registrationPage.inputRegistrationForm(field, text);
+        }
+    }
+
+    @And("The user inputs {} field with {string}")
+    public void theUserInputsEnumFieldWithTest(RegistrationPageInputField field, String text) {
+        registrationPage.inputRegistrationFormWithEnum(field, text);
     }
 }
