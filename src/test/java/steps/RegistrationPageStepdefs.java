@@ -18,26 +18,31 @@ public class RegistrationPageStepdefs {
 
     @Given("Registration Page is opened")
     public void registrationPageIsOpened() {
+        registrationPage.implicitlyWait();
         registrationPage.getHeaderComponent().chooseFromDropdown("Register");
     }
 
     @When("The user inputs {string} field with {string}")
     public void theUserInputsFirstnameFieldWithFirst(String field, String value) {
+        registrationPage.implicitlyWait();
         registrationPage.inputRegistrationForm(field, value);
     }
 
     @And("The user chooses subscription - NO")
     public void theUserChoosesSubscriptionNO() {
+        registrationPage.implicitlyWait();
         registrationPage.clickSubscribeRadioNo();
     }
 
     @And("The user selects Privacy Policy checkbox")
     public void theUserSelectsPrivacyPolicyCheckbox() {
+        registrationPage.implicitlyWait();
         registrationPage.clickConsentCheckbox();
     }
 
     @And("The user clicks Continue button")
     public void theUserClicksContinueButton() {
+        registrationPage.implicitlyWait();
         registrationPage.clickContinueButton();
     }
 
@@ -76,7 +81,7 @@ public class RegistrationPageStepdefs {
         }
     }
 
-    @And("The user inputs {} field with {string}")
+    @And("The user inputs enum {} field with {string}")
     public void theUserInputsEnumFieldWithTest(RegistrationPageInputField field, String text) {
         registrationPage.inputRegistrationFormWithEnum(field, text);
     }

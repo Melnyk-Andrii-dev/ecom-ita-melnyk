@@ -19,14 +19,14 @@ Feature: As an unregistered user
 
   Scenario:[ENUM] The user is registered after providing valid information
     Given Registration Page is opened
-    When The user inputs FIRSTNAME field with 'First'
-    And The user inputs LASTNAME field with 'Last'
+    When The user inputs enum FIRSTNAME field with 'First'
+    And The user inputs enum LASTNAME field with 'Last'
     #need to update the email every time before the test
-    And The user inputs EMAIL field with 'test+2245573@mail.com'
-    And The user inputs TELEPHONE field with '0970000000'
-    And The user inputs PASSWORD field with 'test1234'
+    And The user inputs enum EMAIL field with 'test+2245573@mail.com'
+    And The user inputs enum TELEPHONE field with '0970000000'
+    And The user inputs enum PASSWORD field with 'test1234'
     #password confirmation field
-    And The user inputs PASSWORD_CONFIRMATION field with 'test1234'
+    And The user inputs enum PASSWORD_CONFIRMATION field with 'test1234'
     And The user chooses subscription - NO
     And The user selects Privacy Policy checkbox
     And The user clicks Continue button
