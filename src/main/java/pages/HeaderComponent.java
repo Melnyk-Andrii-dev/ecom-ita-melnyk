@@ -43,10 +43,10 @@ public class HeaderComponent extends AbstractBasePage {
     public void clickCheckoutButton() { findElementBy(By.xpath(CHECKOUT_BUTTON)).click(); }
 
     public int WishlistButtonIndicator() {
-        String line =findElementBy(By.id(WISHLIST_INDICATOR)).getText();
-        Pattern pattern = Pattern.compile("^\\+?(0|[1-9]\\d*)$");
+        String line =findElementBy(By.xpath(WISHLIST_INDICATOR)).getText();
+        Pattern pattern = Pattern.compile("[0-9]+");
         Matcher matcher = pattern.matcher(line);
-        return Integer.parseInt(line.substring(matcher.start(), matcher.end()));
+        return matcher.find() ? Integer.parseInt(line.substring(matcher.start(), matcher.end())) : 0;
     }
 
 }

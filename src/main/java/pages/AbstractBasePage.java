@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class AbstractBasePage {
 
     @Getter
@@ -23,4 +25,10 @@ public class AbstractBasePage {
     public WebElement findElementBy(By by) {
         return waitForVisibilityOfElement(driver.findElement(by));
     }
+
+    public void implicitlyWait(){
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+
+
 }

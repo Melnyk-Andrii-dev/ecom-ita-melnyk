@@ -10,8 +10,10 @@ import io.cucumber.java.en.When;
 import org.assertj.core.api.Assertions;
 import pages.LoginPage;
 import pages.MyAccountPage;
+import properties.PropertyLoader;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class LoginPageStepdefs {
     private static final LoginPage loginPage = new LoginPage();
@@ -64,5 +66,23 @@ public class LoginPageStepdefs {
         }
 
 
+    }
+
+    @Given("User is logged in on Login Page")
+    public void userIsLoggedInOnLoginPage() {
+        Logger log = Logger.getLogger(LoginPageStepdefs.class.getName());
+        log.info("Account dropdown is opening");
+        log.info("Login page is opening");
+        loginPage.getHeaderComponent().chooseFromDropdown("Login");
+
+        String email = PropertyLoader.getProperty("USER_EMAIL");
+        String password = PropertyLoader.getProperty("USER_PASSWORD");
+
+        log.info(String.format("Entering email %s", email));
+        loginPage.inputLoginFieldsWithTable(LoginPageInputField.EMAIL_INPUT_FIELD.toString(), email);
+        log.info(String.format("Entering password %s", password));
+        loginPage.inputLoginFieldsWithTable(LoginPageInputField.PASSWORD_INPUT_FIELD.toString(), password);
+        log.info("Click submit button");
+        loginPage.clickSubmitButton();
     }
 }

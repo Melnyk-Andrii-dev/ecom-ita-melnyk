@@ -2,6 +2,10 @@ Feature: As registered user
   I want to login to the system with my credentials
   So that I can have access to store
 
+  Scenario: Property File check
+    Given User is logged in on Login Page
+
+  @smoke
   Scenario:[ENUM] Store page is displayed after successful login
     Given Login page is opened in header dropdown
     When I enter to EMAIL_INPUT_FIELD field 'sajowi9588@epeva.com' value on Login Page
