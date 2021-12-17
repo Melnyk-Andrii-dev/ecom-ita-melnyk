@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
-
     private static final String SUBMIT_LOGIN_BUTTON = "//input[@type='submit']";
     private static final String LOGIN_ERROR_ALLERT = "//div[contains(@class, 'alert')]";
     private static final String LOGIN_PAGE_INPUT_FIELD = "//input[@name='%s']";

@@ -116,4 +116,5 @@ public class YourStorePageStepdefs {
         Assertions.assertThat(productDetailsPage.isProductDetailsPageOpened()).isEqualTo(true);
 
     }
+
 }
