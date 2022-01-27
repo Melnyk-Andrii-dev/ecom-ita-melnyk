@@ -11,23 +11,35 @@ import java.util.concurrent.TimeUnit;
 
 public class AbstractBasePage {
 
-    @Getter
-    private static WebDriver driver;
+    private static final ThreadLocal<WebDriver> DRIVER_THREAD_LOCAL = new ThreadLocal<>();
 
-    public static void setDriver(WebDriver webDriver) {
-        driver = webDriver;
+    public static void setDriverThreadLocal(WebDriver webDriver){
+        DRIVER_THREAD_LOCAL.set(webDriver);
     }
 
+    public static WebDriver getDriverThreadLocal(){
+        return DRIVER_THREAD_LOCAL.get();
+    }
+
+//    @Getter
+//    private static WebDriver driver;
+//
+//    public static void setDriver(WebDriver webDriver) {
+//        driver = webDriver;
+//    }
+
+
+
     public WebElement waitForVisibilityOfElement(WebElement locator) {
-        return new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(locator));
+        return new WebDriverWait(getDriverThreadLocal(), 10).until(ExpectedConditions.visibilityOf(locator));
     }
 
     public WebElement findElementBy(By by) {
-        return waitForVisibilityOfElement(driver.findElement(by));
+        return waitForVisibilityOfElement(getDriverThreadLocal().findElement(by));
     }
 
     public void implicitlyWait(){
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        getDriverThreadLocal().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
 

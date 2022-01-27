@@ -12,6 +12,8 @@ import org.assertj.core.api.Assertions;
 import pages.RegistrationPage;
 
 import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 public class RegistrationPageStepdefs {
     RegistrationPage registrationPage = new RegistrationPage();
@@ -74,9 +76,15 @@ public class RegistrationPageStepdefs {
 
     @When("The user inputs text into field on Registration Page:")
     public void theUserInputsTextIntoFieldOnRegistrationPage(DataTable dataTable) {
+        String text;
+        String field;
         for (Map<String, String> map : dataTable.asMaps()) {
-            String field = map.get(TableFields.FIELD.toString());
-            String text = map.get(TableFields.TEXT.toString());
+            field = map.get(TableFields.FIELD.toString());
+            if(field.equals("email")){
+                text = UUID.randomUUID().toString().substring(0, 8) + "@mail.com";
+            }else {
+                text = map.get(TableFields.TEXT.toString());
+            }
             registrationPage.inputRegistrationForm(field, text);
         }
     }
@@ -84,5 +92,16 @@ public class RegistrationPageStepdefs {
     @And("The user inputs enum {} field with {string}")
     public void theUserInputsEnumFieldWithTest(RegistrationPageInputField field, String text) {
         registrationPage.inputRegistrationFormWithEnum(field, text);
+    }
+
+
+    @And("The user inputs {string} field with a random email")
+    public void theUserInputsEmailFieldWithARandomEmail(String field) {
+        registrationPage.inputRegistrationForm(field, UUID.randomUUID().toString().substring(0, 8) + "@mail.com");
+    }
+
+    @And("The user inputs enum {} field with a random email")
+    public void theUserInputsEnumEMAILFieldWithARandomEmail(RegistrationPageInputField field) {
+        registrationPage.inputRegistrationFormWithEnum(field, UUID.randomUUID().toString().substring(0, 8) + "@gmail.com");
     }
 }

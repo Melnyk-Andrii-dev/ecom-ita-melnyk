@@ -12,12 +12,12 @@ public class Hook {
     @Before
     public void getDriver() {
         driver = new DriverInit().setDriver();
-        BasePage.setDriver(driver);
+        BasePage.setDriverThreadLocal(driver);
     }
 
     @After
     public void quitDriver() {
         if (driver != null)
-            BasePage.getDriver().quit();
+            BasePage.getDriverThreadLocal().quit();
     }
 }

@@ -25,13 +25,17 @@ public class YourStorePageStepdefs {
     @When("The user clicks add to cart of first product")
     public void theUserClicksAddToCartOfFirstProduct() throws InterruptedException {
         yourStorePage.addToCartFirst();
-//        Thread.sleep(3000);
+        Thread.sleep(3000);
+        // sleep is used only due to Page Factory patter specifics
+        // (YourStorePage is build using the pattern)
     }
 
     @And("The user clicks add to cart of second product")
     public void theUserClicksAddToCartOfSecondProduct() throws InterruptedException {
         yourStorePage.addToCartSecond();
-//        Thread.sleep(3000);
+        Thread.sleep(3000);
+        // sleep is used only due to Page Factory patter specifics
+        // (YourStorePage is build using the pattern)
     }
 
     @Then("Two items are indicated on the minicart button")

@@ -19,7 +19,7 @@ public class YourStorePage extends BasePage {
 //    private final String MINICART_PRODUCTTITLES = "//table[contains(@class, 'table-striped')]//descendant::*[text()='%s']";
 
     public YourStorePage(){
-        PageFactory.initElements(AbstractBasePage.getDriver(), this);
+        PageFactory.initElements(AbstractBasePage.getDriverThreadLocal(), this);
     }
 
     @FindBy(id = "common-home")

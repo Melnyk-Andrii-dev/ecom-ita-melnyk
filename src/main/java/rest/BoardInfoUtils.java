@@ -1,11 +1,16 @@
 package rest;
 
+import rest.dto.CreatedListDto;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BoardInfoUtils {
-    static void deleteBoardInfo(BoardInfo boardInfo) {
+
+    static void deleteBoardInfoFromFile(BoardInfo boardInfo) {
         List<BoardInfo> list = new ArrayList<>();
         BoardInfo boardInfoTemp;
 
@@ -20,7 +25,7 @@ public class BoardInfoUtils {
         if (list.size() == 1) wasLast = true;
         if (list.remove(boardInfo)) {
             File file = new File("data/BoardInfo15.dat");
-            if(wasLast) {
+            if (wasLast) {
                 file.delete();
                 return;
             }
@@ -42,18 +47,40 @@ public class BoardInfoUtils {
                     }
                     i++;
                 }
+            }
+        }
+    }
+    static String getIdByNameFromFile(String name){
+        Map<String, BoardInfo> boardInfoMap = new HashMap<>();
 
+        BoardInfo boardInfo;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data/BoardInfo18-12v2.dat"))) {
 
+            while ((boardInfo = (BoardInfo) ois.readObject()) != null) {
+                boardInfoMap.put(boardInfo.getName(), boardInfo);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(boardInfoMap.get(name).getId()!=null){
+            BoardInfoUtils.deleteBoardInfoFromFile(boardInfoMap.get(name));
+            return boardInfoMap.get(name).getId();
+        }
+        return null;
+    }
 
-
-
-//                try (MyOutputStream mos = new MyOutputStream(new FileOutputStream("data/BoardInfo12.dat"))) {
-//                    for (BoardInfo obj : list) {
-//                        mos.writeObject(obj);
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+    static void wtiteListToFile(CreatedListDto createdListDto, File file){
+        if (file.length() == 0) {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("data/BoardInfo18-12v2.dat", true))) {
+                oos.writeObject(createdListDto);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try (MyOutputStream mos = new MyOutputStream(new FileOutputStream("data/BoardInfo18-12v2.dat", true))) {
+                mos.writeObject(createdListDto);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

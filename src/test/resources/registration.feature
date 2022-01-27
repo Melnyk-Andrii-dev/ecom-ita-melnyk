@@ -7,7 +7,9 @@ Feature: As an unregistered user
     When The user inputs 'firstname' field with 'First'
     And The user inputs 'lastname' field with 'Last'
     #need to update the email every time before the test
-    And The user inputs 'email' field with 'test101@mail.com'
+#    And The user inputs 'email' field with 'test101@mail.com'
+#   Random email format - 8 alphanumeric characters + @mail.com
+    And The user inputs 'email' field with a random email
     And The user inputs 'telephone' field with '0970000000'
     And The user inputs 'password' field with 'test1234'
     #password confirmation field
@@ -22,7 +24,8 @@ Feature: As an unregistered user
     When The user inputs enum FIRSTNAME field with 'First'
     And The user inputs enum LASTNAME field with 'Last'
     #need to update the email every time before the test
-    And The user inputs enum EMAIL field with 'test+2245573@mail.com'
+    #   Random email format - 8 alphanumeric characters + @mail.com
+    And The user inputs enum EMAIL field with a random email
     And The user inputs enum TELEPHONE field with '0970000000'
     And The user inputs enum PASSWORD field with 'test1234'
     #password confirmation field
@@ -38,7 +41,8 @@ Feature: As an unregistered user
       | text             | field     |
       | First            | firstname |
       | Last             | lastname  |
-      | test111@mail.com | email     |
+      #   Email is random, format - 8 alphanumeric characters + @mail.com
+      |                  | email     |
       | 0971111111       | telephone |
       | test1234         | password  |
       | test1234         | confirm   |
